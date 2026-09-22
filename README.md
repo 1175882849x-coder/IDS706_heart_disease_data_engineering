@@ -253,3 +253,8 @@ The project improves reproducibility by providing:
 - Integration testing for the full workflow
 - GitHub Actions continuous integration
 - Clear instructions for running the analysis and tests
+
+## Screenshots
+<img width="1280" height="504" alt="bcb7ee4689056e1b1dde81619498a8a0" src="https://github.com/user-attachments/assets/83ac5cf1-0f38-434e-a406-7c7d105fe783" />
+<img width="1007" height="224" alt="image" src="https://github.com/user-attachments/assets/b9f88bb7-9eee-4b44-8795-66ea61f3430b" />
+

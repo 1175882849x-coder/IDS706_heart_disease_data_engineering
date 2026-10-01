@@ -233,6 +233,8 @@ This separates data preparation from model training and makes the column-selecti
 
 Two tests were added to verify correct feature and target selection and the error raised for a missing required column. All eight tests passed locally after refactoring. Black checks formatting, and flake8 checks code quality; both checks are included in the CI workflow.
 
+<img src="docs/images/refactoring-diff.png" alt="Commit diff showing extraction of model data preparation and required-column validation" width="1000">
+
 
 ## Using Polars
 

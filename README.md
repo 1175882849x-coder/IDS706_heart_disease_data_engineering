@@ -113,10 +113,23 @@ younger_patients = df[df["age"] < 54]
 
 The two groups were compared using chest pain type (`cp`) and average cholesterol (`chol`).
 
-### Average Cholesterol
 
-- Younger patients: approximately **207.00**
-- Older patients: approximately **193.84**
+### Cholesterol Data Quality and Sensitivity Analysis
+
+Although the dataset contains no explicit missing values or duplicate rows, 172 records (18.74%) have zero cholesterol. Their meaning has not been confirmed, so the original data were preserved and a separate analysis compared results with and without zeros.
+
+| Measure | Younger (<54) | Older (≥54) |
+|---|---:|---:|
+| Zero cholesterol records | 59/420 (14.05%) | 113/498 (22.69%) |
+| Mean including zeros | 207.00 | 193.84 |
+| Mean excluding zeros | 240.84 | 250.73 |
+| Median excluding zeros | 231.00 | 242.00 |
+
+**The age-group comparison reverses when zeros are excluded.** The original finding that younger patients have higher average cholesterol is therefore sensitive to zero-value handling. The nonzero subset may not represent all patients.
+
+Among nonzero values, 23 records fall outside the IQR bounds of 115–371. These were flagged and retained because statistical extremes are not necessarily data errors. The existing regression model still uses the original data, including zeros; this analysis does not resolve that model limitation.
+
+<img src="docs/images/cholesterol-sensitivity.png" alt="Age-group mean cholesterol comparison including and excluding zero values" width="800">
 
 ## Machine Learning
 
@@ -256,7 +269,7 @@ The main outcomes of the project are:
 - The dataset contains **918 observations and 10 selected variables**
 - There are no missing values or duplicate rows
 - The median age is **54**
-- Younger patients had slightly higher average cholesterol in this dataset
+- The age-group cholesterol comparison reversed after excluding zero values, highlighting its sensitivity to data-quality assumptions.
 - Older patients had more asymptomatic chest pain cases
 - A Linear Regression model was successfully used as an initial machine learning experiment
 - Core analysis logic was reorganized into reusable Python functions

@@ -4,6 +4,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 
+FEATURE_COLUMNS = ["age", "trestbps", "chol", "oldpeak"]
+TARGET_COLUMN = "thalch"
+
 
 def load_data(filepath):
     """
@@ -31,18 +34,27 @@ def count_chest_pain_types(df):
     return cp_counts
 
 
+def prepare_model_data(df):
+    """Select model features and target, checking that required columns exist."""
+    required_columns = FEATURE_COLUMNS + [TARGET_COLUMN]
+    missing_columns = [
+        column for column in required_columns if column not in df.columns
+    ]
+
+    if missing_columns:
+        raise ValueError(f"Missing required columns: {', '.join(missing_columns)}")
+
+    return df[FEATURE_COLUMNS], df[TARGET_COLUMN]
+
+
 def train_model(df):
     """
     Train a linear regression model to predict maximum heart rate (thalch).
     """
-    X = df[["age", "trestbps", "chol", "oldpeak"]]
-    y = df["thalch"]
+    X, y = prepare_model_data(df)
 
     X_train, X_test, y_train, y_test = train_test_split(
-        X,
-        y,
-        test_size=0.2,
-        random_state=42
+        X, y, test_size=0.2, random_state=42
     )
 
     model = LinearRegression()

@@ -34,7 +34,7 @@ def test_full_workflow():
     assert mse >= 0
 
 
-# besides normal end to end workflow, test edge case for the workflow for multi components
+# Test the age boundary across multiple workflow components.
 
 
 def test_age_boundary_workflow():

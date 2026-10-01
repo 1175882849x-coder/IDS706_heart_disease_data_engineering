@@ -163,7 +163,7 @@ These visualizations make differences between the two age groups easier to inter
 
 This project uses `pytest` for automated testing.
 
-The current test suite contains **6 tests**:
+The current test suite contains **8 tests**:
 
 ### Unit Tests
 
@@ -192,7 +192,7 @@ pytest -v
 A successful run should report:
 
 ```text
-6 passed
+8 passed
 ```
 
 ## Continuous Integration
@@ -225,6 +225,15 @@ This exercise demonstrated how a Dockerfile packages a project environment and h
 <img src="docs/images/docker-tests.png" alt="Six project tests passing inside the Docker container" width="800">
 
 
+## Refactoring and Code Quality
+
+Model feature and target column names are now defined in `FEATURE_COLUMNS` and `TARGET_COLUMN`. Data selection was extracted from `train_model()` into `prepare_model_data()`, which also raises a clear error when required columns are missing.
+
+This separates data preparation from model training and makes the column-selection logic independently testable. The existing return values of `train_model()` were preserved for notebook compatibility.
+
+Two tests were added to verify correct feature and target selection and the error raised for a missing required column. All eight tests passed locally after refactoring. Black checks formatting, and flake8 checks code quality; both checks are included in the CI workflow.
+
+
 ## Using Polars
 
 Pandas and Polars were compared by reading the same CSV file and performing similar basic data operations.
@@ -251,7 +260,7 @@ The main outcomes of the project are:
 - Core analysis logic was reorganized into reusable Python functions
 - Four unit tests validate the major functions
 - Two integration tests validate the workflow and an important age-boundary edge case
-- All six tests pass successfully
+- All eight tests pass successfully
 - GitHub Actions automatically runs the tests after code changes
 
 ## Reproducibility

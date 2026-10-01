@@ -1,10 +1,12 @@
 import pandas as pd
+import pytest
 
 from src.heart_disease import (
     load_data,
     split_age_groups,
     count_chest_pain_types,
     train_model,
+    prepare_model_data,
 )
 
 
@@ -46,3 +48,38 @@ def test_train_model():
     assert model is not None
     assert len(predictions) == len(y_test)
     assert mse >= 0
+
+
+def test_prepare_model_data():
+    df = pd.DataFrame(
+        {
+            "age": [45, 60],
+            "trestbps": [120, 140],
+            "chol": [200, 240],
+            "oldpeak": [0.0, 1.5],
+            "thalch": [170, 130],
+            "sex": [0, 1],
+        }
+    )
+
+    X, y = prepare_model_data(df)
+
+    expected_X = df[["age", "trestbps", "chol", "oldpeak"]]
+    expected_y = df["thalch"]
+
+    pd.testing.assert_frame_equal(X, expected_X)
+    pd.testing.assert_series_equal(y, expected_y)
+
+
+def test_prepare_model_data_missing_column():
+    df = pd.DataFrame(
+        {
+            "age": [45],
+            "trestbps": [120],
+            "oldpeak": [0.0],
+            "thalch": [170],
+        }
+    )
+
+    with pytest.raises(ValueError, match="Missing required columns: chol"):
+        prepare_model_data(df)

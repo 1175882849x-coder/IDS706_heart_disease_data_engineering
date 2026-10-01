@@ -218,11 +218,11 @@ docker run --rm heart-disease-analysis
 
 The image includes Python 3.12, project dependencies, source code, data, and tests. Its default command runs the pytest suite, including the integration test for data loading, grouping, model training, and evaluation.
 
-The image built successfully, and all six tests passed inside the Linux container. The container exits after testing; `--rm` removes the container while preserving the image.
+The image built successfully, and all eight tests passed inside the Linux container. The container exits after testing; `--rm` removes the container while preserving the image.
 
 This exercise demonstrated how a Dockerfile packages a project environment and how an image is used to create a runnable container.
 
-<img src="docs/images/docker-tests.png" alt="Six project tests passing inside the Docker container" width="800">
+<img src="docs/images/docker-tests.png" alt="Eight project tests passing inside the Docker container" width="800">
 
 
 ## Refactoring and Code Quality

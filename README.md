@@ -197,22 +197,14 @@ A successful run should report:
 
 ## Continuous Integration
 
-GitHub Actions is used to automatically run the test suite whenever code is pushed to the `main` branch or a pull request is opened against `main`.
+The GitHub Actions workflow in `.github/workflows/tests.yml` automatically installs dependencies and runs the full pytest suite.
 
-The workflow:
+- **Triggers:** pushes to `main`, pull requests targeting `main`, a weekly schedule on Mondays at 12:00 UTC, and manual runs through the Actions tab.
+- **Test matrix:** Python 3.11 and 3.12 on Ubuntu.
+- **Test coverage:** unit and integration tests covering data loading, age grouping, chest pain counts, model training, and the age-54 boundary case.
+- **Verification:** both Python matrix jobs passed successfully after the workflow update.
 
-1. Checks out the repository
-2. Sets up Python
-3. Installs dependencies from `requirements.txt`
-4. Runs the complete pytest test suite
-
-The workflow configuration is stored in:
-
-```text
-.github/workflows/tests.yml
-```
-
-This helps ensure that changes to the project do not break existing functionality.
+The CI status badge at the top of this README links to the workflow and displays its current status.
 
 ## Using Polars
 

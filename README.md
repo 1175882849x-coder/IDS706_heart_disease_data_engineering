@@ -8,6 +8,28 @@ This IDS706 project investigates how cholesterol patterns differ between age gro
 
 The engineering workflow includes reusable Python functions, automated tests, GitHub Actions, code-quality checks, and Docker.
 
+## Personal Motivation and Reflection
+
+My interest in this project began with my family history of heart disease. I had also read an article discussing a possible relationship between height and heart disease risk, which made me curious about cardiovascular health data. Although this project did not directly examine height or family history, these personal interests motivated me to explore the dataset.
+
+Based on my understanding of cholesterol and cardiovascular risk, I initially expected higher cholesterol levels, particularly among older patients. However, the initial analysis did not match my expectations. After checking my code, I revisited the data and discovered that 172 records contained cholesterol values of zero, even though the dataset had no explicit missing values.
+
+Drawing on my background knowledge and further reading, I decided to treat zero cholesterol values as unavailable measurements and exclude those records from the cholesterol analysis and regression model. This reduced the sample from 918 to 746 records. I preserved the original data for analyses that did not require cholesterol and compared results before and after filtering.
+
+The comparison revealed that the direction of the age-group difference reversed after excluding zeros. This showed how strongly a data-quality decision could affect the conclusion. However, a result matching my expectations does not automatically make it more accurate. The meaning of the zeros remains uncertain, and excluding records may introduce selection bias, especially because zero values were more common in the older group.
+
+This project deepened my understanding of testing. Tests should verify not only that code runs correctly, but also that it handles important assumptions about the data. A dataset can contain no `NaN` values and still include measurements that require investigation. Without that judgment, it would be easy to treat every zero as an ordinary number and produce technically correct calculations with misleading interpretations.
+
+In future projects, I will pay closer attention to possible sentinel values—numbers used to represent missing or unavailable information. Their meaning should be checked against the dataset documentation rather than assumed. I will also include targeted tests to verify how these values are handled, whether features and targets remain aligned, and whether the original data are preserved. These checks require relatively little effort but can substantially improve the reliability of an analysis.
+
+## Problem Statement
+
+Health datasets may contain unavailable measurements recorded as ordinary numbers, making data-quality problems difficult to detect through missing-value checks alone. If these values are included without investigation, they can distort comparisons between patient groups and affect the data used to train predictive models.
+
+Motivated by my family history of heart disease, this project examines how cholesterol levels differ between patients younger than 54 and those aged 54 or older, and how that comparison changes when zero cholesterol values are treated as unavailable measurements. It also uses the resulting nonzero-cholesterol subset to build an exploratory model predicting maximum heart rate.
+
+The goal is to produce a transparent, reproducible analysis that shows how data-cleaning decisions affect findings, supported by automated tests, continuous integration, and a containerized testing environment.
+
 ## Data and Cleaning Decisions
 
 Source: [Heart Disease UCI Dataset on Kaggle](https://www.kaggle.com/datasets/navjotkaushal/heart-disease-uci-dataset).

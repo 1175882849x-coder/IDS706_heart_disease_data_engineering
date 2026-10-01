@@ -35,7 +35,7 @@ def count_chest_pain_types(df):
 
 
 def prepare_model_data(df):
-    """Select model features and target, checking that required columns exist."""
+    """Select model data, excluding records with zero cholesterol."""
     required_columns = FEATURE_COLUMNS + [TARGET_COLUMN]
     missing_columns = [
         column for column in required_columns if column not in df.columns
@@ -44,7 +44,12 @@ def prepare_model_data(df):
     if missing_columns:
         raise ValueError(f"Missing required columns: {', '.join(missing_columns)}")
 
-    return df[FEATURE_COLUMNS], df[TARGET_COLUMN]
+    model_df = df.loc[df["chol"] != 0].copy()
+
+    if len(model_df) < 5:
+        raise ValueError("At least 5 records with nonzero cholesterol are required.")
+
+    return model_df[FEATURE_COLUMNS], model_df[TARGET_COLUMN]
 
 
 def train_model(df):

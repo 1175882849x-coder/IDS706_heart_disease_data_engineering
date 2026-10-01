@@ -206,6 +206,25 @@ The GitHub Actions workflow in `.github/workflows/tests.yml` automatically insta
 
 The CI status badge at the top of this README links to the workflow and displays its current status.
 
+
+## Docker
+
+Install and start Docker Desktop, then run these commands from the project root:
+
+```bash
+docker build -t heart-disease-analysis .
+docker run --rm heart-disease-analysis
+```
+
+The image includes Python 3.12, project dependencies, source code, data, and tests. Its default command runs the pytest suite, including the integration test for data loading, grouping, model training, and evaluation.
+
+The image built successfully, and all six tests passed inside the Linux container. The container exits after testing; `--rm` removes the container while preserving the image.
+
+This exercise demonstrated how a Dockerfile packages a project environment and how an image is used to create a runnable container.
+
+<img src="docs/images/docker-tests.png" alt="Six project tests passing inside the Docker container" width="800">
+
+
 ## Using Polars
 
 Pandas and Polars were compared by reading the same CSV file and performing similar basic data operations.

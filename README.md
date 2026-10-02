@@ -2,6 +2,10 @@
 
 [![Python Tests](https://github.com/1175882849x-coder/IDS706_heart_disease_data_engineering/actions/workflows/tests.yml/badge.svg)](https://github.com/1175882849x-coder/IDS706_heart_disease_data_engineering/actions/workflows/tests.yml)
 
+### My Refactoring Motto
+
+“If my future self needs a detective to understand my code, it’s time to refactor.”
+
 ## Project Purpose
 
 This IDS706 project investigates how cholesterol patterns differ between age groups and how data-quality decisions affect the findings. It also explores chest pain patterns and uses linear regression to predict maximum heart rate.

@@ -4,7 +4,7 @@
 
 ### My Refactoring Motto
 
-“If my future self needs a detective to understand my code, it’s time to refactor.”
+“Eat well, sleep well, refactor well.”
 
 ## Project Purpose
 
